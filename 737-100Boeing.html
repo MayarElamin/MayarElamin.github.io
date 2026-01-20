@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Senior Design Project</title>
+
+  <!-- Theme stylesheet -->
+  <link rel="stylesheet" href="assets/css/main.css" />
+
+  <style>
+    body {
+      background-color: #ffffff;
+      color: #000;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Flex wrapper to center content */
+    .container {
+      display: flex;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    /* Card styling */
+    section {
+      max-width: 900px;
+      width: 100%;
+      background: #fff;
+      padding: 2rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 20px;
+    }
+   
+  img { 
+    width: 100%; 
+  }
+
+  .image-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 15px;
+  }
+
+  .image-grid img {
+    width: 200%;
+    height: 400px;        /* choose any consistent height */
+    object-fit: contain;  /* Keep entire image visible */
+    border: 1px solid #ddd; /* optional, looks cleaner */
+    background: #f8f8f8;  /* optional padding background */
+  }
+
+  /* Responsive - stack images on small screens */
+  @media (max-width: 600px) {
+    .image-grid img {
+      width: 100%;
+      height: 200px;
+    }
+  }
+
+    ul {
+      margin-left: 20px;
+    }
+
+
+    .button-row a {
+      display: flex;       /* aligns buttons horizontally */
+      justify-content: center; /* centers them under the content */
+      gap: 10px;           /* spacing between buttons */
+      margin-top: 20px;    /* spacing above the buttons */
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 20px;
+    }
+
+    section {
+      max-width: 1600px;
+      width: 100%;
+      background: #fff;
+      padding: 2rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    gap: 20px;
+}
+
+.image-grid img {
+    width: 100%;
+    height: 480px; /* adjust to change crop height */
+    object-fit: cover; /* keeps all images uniformly cropped */
+    object-position: center;
+}
+
+/* LIGHTBOX POPUP */
+.lightbox {
+  display: none; 
+  position: fixed;
+  z-index: 9999;
+  padding-top: 40px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: rgba(0,0,0,0.85);
+}
+
+.lightbox-content {
+  display: block;
+  margin: auto;
+  max-width: 40%;
+  max-height: 85vh;
+}
+
+.close {
+  position: absolute;
+  top: 20px;
+  right: 35px;
+  color: white;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.hero-img {
+    width: 60%;     /* decrease % to make smaller */
+    display: block;
+    margin: 0 auto; /* center it */
+}
+
+.image-grid.masonry {
+  column-count: 2;          /* 2 columns desktop */
+  column-gap: 20px;
+}
+
+.image-grid.masonry img {
+  width: 100%;
+  height: auto;             /* preserves aspect ratio */
+  margin-bottom: 20px;
+  display: block;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .image-grid.masonry {
+    column-count: 1;
+  }
+}
+
+
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Formula SAE</h1>
+  </header>
+
+  <div class="container">
+    <section>
+      <img class="hero-img" src="images/Boeing 737-100 CAD/737_Iso.png" alt="737-Iso">
+
+      <p>
+      Using SolidWorks, this team project involved CAD modeling the Boeing 737-100, the first aircraft in Boeing’s iconic 737 family. The 737-100 was 
+      chosen because it represents a foundational commercial aircraft design, which was both simple enough to model at a student level, and historically 
+      significant. The seating capacity of the 737-100 is up to 118 passengers, hence, it was used for short and medium-range trips with Lufthansa purchasing 
+      22 of the 30 units produced.
+      </p>
+
+      <p>
+      The goal of the project was to create a complete, proportionally accurate SolidWorks model and develop core CAD skills. This was my first official 
+      SolidWorks aircraft project, and I was responsible for designing the fuselage, which was both the most challenging and rewarding part of the build. 
+      With limited reference material, I translated top, side, and front views into a three-dimensional model using splines, lofts, and feature cuts.
+      </p>
+
+      <p>
+      Throughout the project, our team collaborated to resolve modeling issues and ensure consistency across the final design. The project strengthened my 
+      skills in CAD modeling, problem-solving, engineering judgment, and technical communication, and also provided hands-on experience with the kind of 
+      iterative design process used in industry.
+      </p>
+
+      <h2>My Role</h2>
+      <ul>
+        <li>Led the fuselage design and modeling of a Boeing 737-100 in SolidWorks.</li>
+        <li>Incorporated real-world aircraft standards, including Boeing passenger window dimensions, to ensure realistic scaling and design accuracy.</li>
+        <li>Applied engineering judgment to estimate cockpit dimensions using reference images where formal drawings were unavailable</li>
+        <li>Troubleshot design challenges by collaborating with teammates and seeking information from other teams.</li>
+        <li>Contributed to a collaborative team environment, communicating design decisions clearly and adapting based on group feedback</li>
+      </ul>
+
+
+<h2>Project Images</h2>
+<div class="image-grid masonry" style="margin-bottom: 30px;">
+    <img src="images/Boeing 737-100 CAD/737-front.png" alt="Front view">
+    <img src="images/Boeing 737-100 CAD/737-side.png" alt="Side view">
+    <img src="images/Boeing 737-100 CAD/737-engine.png" alt="Engine">
+    <img src="images/Boeing 737-100 CAD/737-fuse.png" alt="Fuselage">
+</div>
+
+
+<h2>Project Presentation</h2>
+
+<a href="B1_Boeing_737_100.pdf" target="_blank">
+  <img src="images/Boeing 737-100 CAD/737-100_Intro_Slide.png"
+       alt="737-100_Intro_Slide Presentation Preview"
+       style="
+         width: 100%;
+         max-width: 500px;
+         display: block;
+         margin: 20px auto;
+         cursor: pointer;
+         box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+       ">
+</a>
+
+<p style="text-align:center; font-size: 0.9rem;">
+  Click preview to view full presentation (PDF)
+</p>
+
+      <a href="Projects.html" class="button">← All Projects</a><br>
+      <a href="AboutMe.html" class="button">← Back to Recent Projects</a>
+
+    </section>
+</div>
+
+<!-- Image Lightbox Modal -->
+<div id="lightbox" class="lightbox">
+  <span class="close">&times;</span>
+  <img class="lightbox-content" id="lightbox-img">
+</div>
+
+<script>
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightbox-img");
+  const closeBtn = document.querySelector(".close");
+
+  document.querySelectorAll(".image-grid img").forEach(img => {
+    img.addEventListener("click", () => {
+      lightbox.style.display = "block";
+      lightboxImg.src = img.src;
+    });
+  });
+
+  closeBtn.onclick = () => lightbox.style.display = "none";
+
+  // Click outside image to close
+  lightbox.onclick = (e) => {
+    if (e.target === lightbox) lightbox.style.display = "none";
+  }
+</script>
+
+</body>
+</html>

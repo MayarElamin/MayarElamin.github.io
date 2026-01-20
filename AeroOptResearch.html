@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aerodynamic Shape Optimization Research</title>
+
+  <!-- Theme stylesheet -->
+  <link rel="stylesheet" href="assets/css/main.css" />
+
+  <style>
+    body {
+      background-color: #ffffff;
+      color: #000;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Flex wrapper to center content */
+    .container {
+      display: flex;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    /* Card styling */
+    section {
+      max-width: 900px;
+      width: 100%;
+      background: #fff;
+      padding: 2rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 20px;
+    }
+   
+  img { 
+    width: 100%; 
+  }
+
+  .image-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 15px;
+  }
+
+  .image-grid img {
+    width: 200%;
+    height: 400px;        /* choose any consistent height */
+    object-fit: contain;  /* Keep entire image visible */
+    border: 1px solid #ddd; /* optional, looks cleaner */
+    background: #f8f8f8;  /* optional padding background */
+  }
+
+  /* Responsive - stack images on small screens */
+  @media (max-width: 600px) {
+    .image-grid img {
+      width: 100%;
+      height: 200px;
+    }
+  }
+
+    ul {
+      margin-left: 20px;
+    }
+
+
+    .button-row a {
+      display: flex;       /* aligns buttons horizontally */
+      justify-content: center; /* centers them under the content */
+      gap: 10px;           /* spacing between buttons */
+      margin-top: 20px;    /* spacing above the buttons */
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 20px;
+    }
+
+    section {
+      max-width: 1600px;
+      width: 100%;
+      background: #fff;
+      padding: 2rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    gap: 20px;
+}
+
+.image-grid img {
+    width: 100%;
+    height: 480px; 
+    object-fit: cover; /* keep all images uniformly cropped */
+    object-position: center;
+}
+
+/* LIGHTBOX POPUP */
+.lightbox {
+  display: none; 
+  position: fixed;
+  z-index: 9999;
+  padding-top: 40px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: rgba(0,0,0,0.85);
+}
+
+.lightbox-content {
+  display: block;
+  margin: auto;
+  max-width: 40%;
+  max-height: 85vh;
+}
+
+.close {
+  position: absolute;
+  top: 20px;
+  right: 35px;
+  color: white;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
+    .hero-img {
+    width: 60%;     /* decrease % to make smaller */
+    display: block;
+    margin: 0 auto; /* center it */
+}
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Aerodynamic Shape Optimization Research</h1>
+  </header>
+
+  <div class="container">
+    <section>
+      <img class="hero-img" src="images/MDO Optimization Research/NACA0012_nuTilda.png" alt="NACA0012_nuTilda">
+
+      <p>
+      During the summer of 2024, I conducted research under the supervision of Dr. Ping He, building on concepts I first explored in an 
+      Aerospace Systems Integration course, where I was introduced to Multidisciplinary Design Optimization (MDO). My project focused 
+      on improving aerodynamic performance using the SMT (Surrogate Modeling Toolbox), which is a Python-based package that helps make 
+      the engineering design stage faster using data-driven predictions of complex simulations. I worked with two key surrogate 
+      modeling techniques: Kriging, which uses statistics and interpolation to predict aerodynamic behavior with high accuracy, 
+      and Radial Basis Function (RBF) models, which uses smooth trends in design spaces and reduce computational cost. 
+      By applying these methods to aircraft wing optimization, I explored how machine learning–based surrogate models can speed up 
+      MDO and provide more efficient aerodynamic predictions.
+      </p>
+
+  <h2>Research Images</h2>
+<div class="image-grid">
+    <img src="images/MDO Optimization Research/NACA0012_Pressure_Field_Mesh.png" alt="NACA0012_Pressure_Field_Mesh">
+    <img src="images/MDO Optimization Research/NACA0012_nuTilda.png" alt="OptimizationProcess">
+    <img src="images/MDO Optimization Research/OptimizationProcess.png" alt="OptimizationProcess">
+
+    <img src="images/MDO Optimization Research/Kriging.png" alt="Kriging">
+    <img src="images/MDO Optimization Research/RBF.png" alt="RBF">
+
+</div>
+<br>
+
+                                <!-- Code -->
+                                    <h2>Kriging Model Example Code</h2>
+                                    <pre><code>
+
+from __future__ import print_function, division
+import numpy as np
+from scipy import linalg
+from smt.utils.misc import compute_rms_error
+from smt.problems import Sphere, NdimRobotArm, Rosenbrock
+from smt.sampling_methods import LHS
+from smt.surrogate_models import LS, QP, KPLS, KRG, KPLSK, GEKPLS, MGP
+#to ignore warning messages
+import warnings
+warnings.filterwarnings("ignore")
+try:
+    from smt.surrogate_models import IDW, RBF, RMTC, RMTB
+    compiled_available = True
+except:
+    compiled_available = False
+try:
+    import matplotlib.pyplot as plt
+    plot_status = True
+except:
+    plot_status = False
+import scipy.interpolate
+from mpl_toolkits.mplot3d import Axes3D
+import matplotlib.pyplot as plt
+from matplotlib import cm
+
+
+########### Initialization of the problem, construction of the training and validation points
+ndim = 2
+ndoe = 20 #int(10*ndim)
+# Define the function
+fun = Rosenbrock(ndim=ndim)
+# Construction of the DOE
+# in order to have the always same LHS points, random_state=1
+sampling = LHS(xlimits=fun.xlimits, criterion='ese', random_state=1)
+xt = sampling(ndoe)
+# Compute the outputs
+yt = fun(xt)
+# Construction of the validation points
+ntest = 200 #500
+sampling = LHS(xlimits=fun.xlimits, criterion='ese', random_state=1)
+xtest = sampling(ntest)
+ytest = fun(xtest)
+
+########### The Kriging model
+# The variable 'theta0' is a list of length ndim.
+t = KRG(theta0=[1e-2]*ndim,print_prediction = False)
+t.set_training_values(xt,yt[:,0])
+t.train()
+# Prediction of the validation points
+y = t.predict_values(xtest)
+print('Kriging,  err: '+ str(compute_rms_error(t,xtest,ytest)))
+if plot_status:
+# Plot the function and the prediction
+    fig = plt.figure()
+    plt.plot(ytest, ytest, '-', label='$y_{true}$')
+    plt.plot(ytest, y, 'r.', label='$\hat{y}$')
+   
+    plt.xlabel('$y_{true}$')
+    plt.ylabel('$\hat{y}$')
+    plt.legend(loc='upper left')
+    plt.title('Kriging model: validation of the prediction model')   
+if plot_status:
+    plt.show()
+# Value of theta
+print("theta values",  t.optimal_theta)
+
+Output:
+___________________________________________________________________________
+                                  Kriging
+___________________________________________________________________________
+ Problem size
+      # training points.        : 20
+___________________________________________________________________________
+   
+ Training
+   
+   Training ...
+   Training - done. Time (sec):  0.6901336
+Kriging,  err: 0.00010147480934197768
+theta values [0.02421096 0.0001081 ]
+                                    </code></pre>
+
+      <a href="Projects.html" class="button">← All Projects</a><br>
+      <a href="AboutMe.html" class="button">← Back to Recent Projects</a>
+
+    </section>
+  </div>
+
+<!-- Image Lightbox Modal -->
+<div id="lightbox" class="lightbox">
+  <span class="close">&times;</span>
+  <img class="lightbox-content" id="lightbox-img">
+</div>
+
+<script>
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightbox-img");
+  const closeBtn = document.querySelector(".close");
+
+  document.querySelectorAll(".image-grid img").forEach(img => {
+    img.addEventListener("click", () => {
+      lightbox.style.display = "block";
+      lightboxImg.src = img.src;
+    });
+  });
+
+  closeBtn.onclick = () => lightbox.style.display = "none";
+
+  // Click outside image to close
+  lightbox.onclick = (e) => {
+    if (e.target === lightbox) lightbox.style.display = "none";
+  }
+</script>
+
+</body>
+</html>

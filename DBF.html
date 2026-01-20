@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AIAA Design Build Fly (DBF)</title>
+
+  <!-- Theme stylesheet -->
+  <link rel="stylesheet" href="assets/css/main.css" />
+
+  <style>
+    body {
+      background-color: #ffffff;
+      color: #000;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Flex wrapper to center content */
+    .container {
+      display: flex;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    /* Card styling */
+    section {
+      max-width: 900px;
+      width: 100%;
+      background: #fff;
+      padding: 2rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 20px;
+    }
+   
+  img { 
+    width: 100%; 
+  }
+
+  .image-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 15px;
+  }
+
+  .image-grid img {
+    width: 200%;
+    height: 400px;        /* choose any consistent height */
+    object-fit: contain;  /* Keep entire image visible */
+    border: 1px solid #ddd; /* optional, looks cleaner */
+    background: #f8f8f8;  /* optional padding background */
+  }
+
+  /* Responsive - stack images on small screens */
+  @media (max-width: 600px) {
+    .image-grid img {
+      width: 100%;
+      height: 200px;
+    }
+  }
+
+    ul {
+      margin-left: 20px;
+    }
+
+
+    .button-row a {
+      display: flex;       /* aligns buttons horizontally */
+      justify-content: center; /* centers them under the content */
+      gap: 10px;           /* spacing between buttons */
+      margin-top: 20px;    /* spacing above the buttons */
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 20px;
+    }
+
+    section {
+      max-width: 1600px;
+      width: 100%;
+      background: #fff;
+      padding: 2rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    gap: 20px;
+}
+
+.image-grid img {
+    width: 100%;
+    height: 480px; /* adjust to change crop height */
+    object-fit: cover; /* keeps all images uniformly cropped */
+    object-position: center;
+}
+
+/* LIGHTBOX POPUP */
+.lightbox {
+  display: none; 
+  position: fixed;
+  z-index: 9999;
+  padding-top: 40px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: rgba(0,0,0,0.85);
+}
+
+.lightbox-content {
+  display: block;
+  margin: auto;
+  max-width: 40%;
+  max-height: 85vh;
+}
+
+.close {
+  position: absolute;
+  top: 20px;
+  right: 35px;
+  color: white;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+}
+ 
+.hero-img {
+    width: 60%;     /* decrease % to make smaller */
+    display: block;
+    margin: 0 auto; /* center it */
+}
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>AIAA Design Build Fly (DBF)</h1>
+  </header>
+
+  <div class="container">
+    <section>
+      <img class="hero-img" src="images/DBF/Runway2.jpg" alt="Runway2">
+
+      <p>
+        When I first explored student design teams at Iowa State, AIAA Design Build Fly (DBF) immediately stood out for its strong team 
+        dynamic and ambitious mission. The challenge of designing an RC aircraft that could meet real-world engineering constraints 
+        excited me, and I wanted to be part of it. Although I joined as a new member, I asked to take on a leadership position, and so, I led the Operations team, which was a brand-new subsystem with little structure or guidance. I quickly realized that to be successful in my role 
+        I would have to immediately start building organization from the ground up, and getting as much guidance as I possibly can. By asking questions, defining my team members' roles, and establishing a clear workflow, I 
+        helped create a smoother dynamic and motivated team that kept the project on schedule and aligned with competition requirements.
+      </p>
+
+      <p>
+        Throughout the course of the project, our team worked to design an aircraft capable of taking off within 20 feet and completing three complex 
+        missions with a foldable wing design, as required by the AIAA rulebook. The process required constant problem-solving, communication, 
+        and adaptability as we designed, manufactured, and tested. At the end, our efforts paid off and we placed 45th out of 100 
+        teams, making it the first time an Iowa State DBF team earn competition points. Beyond rankings, the experience connected us with 
+        aerospace enthusiasts from around the world and deepened my appreciation for collaborative engineering. It was more than just a competition, it 
+        was a lesson in leadership, resilience, and innovation. 
+      </p>
+
+      <h2>My Role</h2>
+      <ul>
+        <li>Led the operations team for Iowa State’s AIAA Design Build Fly project, ensuring all decisions complied with competition rules and met deadlines.</li>
+        <li>Coordinated design, manufacturing, and testing schedules, using Gantt charts to track progress and maintain efficient workflow across subsystems.</li>
+        <li>Oversaw logistics, purchasing, and budget management, submitting required forms and selecting flight test windows based on weather and team readiness.</li>
+        <li>Planned and executed flight tests, assigning roles, developing safety checklists, and leading post-flight debriefs to evaluate performance and identify improvements.</li>
+        <li>Collaborated on the writing and editing of technical reports.</li>
+      </ul>
+
+
+  <h2>Project Images</h2>
+<div class="image-grid">
+    <img src="images/DBF/Group1.jpg" alt="Group1">
+    <img src="images/DBF/Manufacturing.jpeg" alt="Manufacturing">
+    <img src="images/DBF/BallastTesting.jpeg" alt="BallastTesting">
+
+    <img src="images/DBF/FoldedWing.jpeg" alt="FoldedWing">
+    <img src="images/DBF/Evolution.jpeg" alt="Evolution">
+    <img src="images/DBF/InAir.jpg" alt="InAir">
+</div>
+<br>
+
+      <a href="Projects.html" class="button">← All Projects</a><br>
+      <a href="AboutMe.html" class="button">← Back to Recent Projects</a>
+
+    </section>
+</div>
+
+<!-- Image Lightbox Modal -->
+<div id="lightbox" class="lightbox">
+  <span class="close">&times;</span>
+  <img class="lightbox-content" id="lightbox-img">
+</div>
+
+<script>
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightbox-img");
+  const closeBtn = document.querySelector(".close");
+
+  document.querySelectorAll(".image-grid img").forEach(img => {
+    img.addEventListener("click", () => {
+      lightbox.style.display = "block";
+      lightboxImg.src = img.src;
+    });
+  });
+
+  closeBtn.onclick = () => lightbox.style.display = "none";
+
+  // Click outside image to close
+  lightbox.onclick = (e) => {
+    if (e.target === lightbox) lightbox.style.display = "none";
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Senior Design Project</title>
+
+  <!-- Theme stylesheet -->
+  <link rel="stylesheet" href="assets/css/main.css" />
+
+  <style>
+    body {
+      background-color: #ffffff;
+      color: #000;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Flex wrapper to center content */
+    .container {
+      display: flex;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    /* Card styling */
+    section {
+      max-width: 900px;
+      width: 100%;
+      background: #fff;
+      padding: 2rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 20px;
+    }
+   
+  img { 
+    width: 100%; 
+  }
+
+  .image-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 15px;
+  }
+
+  .image-grid img {
+    width: 200%;
+    height: 400px;        /* choose any consistent height */
+    object-fit: contain;  /* Keep entire image visible */
+    border: 1px solid #ddd; /* optional, looks cleaner */
+    background: #f8f8f8;  /* optional padding background */
+  }
+
+  /* Responsive - stack images on small screens */
+  @media (max-width: 600px) {
+    .image-grid img {
+      width: 100%;
+      height: 200px;
+    }
+  }
+
+    ul {
+      margin-left: 20px;
+    }
+
+
+    .button-row a {
+      display: flex;       /* aligns buttons horizontally */
+      justify-content: center; /* centers them under the content */
+      gap: 10px;           /* spacing between buttons */
+      margin-top: 20px;    /* spacing above the buttons */
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 20px;
+    }
+
+    section {
+      max-width: 1600px;
+      width: 100%;
+      background: #fff;
+      padding: 2rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    gap: 20px;
+}
+
+.image-grid img {
+    width: 100%;
+    height: 480px; /* adjust to change crop height */
+    object-fit: cover; /* keeps all images uniformly cropped */
+    object-position: center;
+}
+
+/* LIGHTBOX POPUP */
+.lightbox {
+  display: none; 
+  position: fixed;
+  z-index: 9999;
+  padding-top: 40px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: rgba(0,0,0,0.85);
+}
+
+.lightbox-content {
+  display: block;
+  margin: auto;
+  max-width: 40%;
+  max-height: 85vh;
+}
+
+.close {
+  position: absolute;
+  top: 20px;
+  right: 35px;
+  color: white;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.hero-img {
+    width: 40%;     /* decrease % to make smaller */
+    display: block;
+    margin: 0 auto; /* center it */
+}
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Astrodynamics Space Mission</h1>
+  </header>
+
+  <div class="container">
+    <section>
+      <p>
+      This astrodynamics course project focused on designing and analyzing an interplanetary mission from Earth to Venus using basic orbital mechanics 
+      techniques. Named the “Hell Bound School Bus” mission, the project explored how a spacecraft could safely 
+      and efficiently transport passengers between planets while minimizing fuel use and travel time.</p>
+      <p>
+      The mission began in a low Earth parking orbit and used a Hohmann transfer trajectory to travel toward Venus, which is one of the most energy-efficient methods 
+      for interplanetary transfers. The project required calculating and verifying orbital parameters such as position and velocity vectors, eccentricity, inclination, 
+      and true anomaly at different phases. The team worked on carefully timing impulse burns to escape Earth’s gravity, transfer between heliocentric orbits, and 
+      entering a stable orbit around Venus.</p>
+      <p>
+      Using MATLAB, the team modeled each phase of the mission, calculated required Δv (delta-v) for every maneuver and the total time of flight. The mission 
+      required approximately 149 days to arrive at Venus, with a total velocity change of 23.2 km/s. </p>
+      <p>
+      This project helped the team apply theoretical astrodynamics principles to real mission design decisions, while taking into consideration the trade-offs between fuel 
+      efficiency, trajectory complexity, and mission objectives.</p>
+
+
+      <h2>My Role</h2>
+      <ul>
+        <li>Collaborated with team members to design an interplanetary Earth-to-Venus mission using orbital mechanics principles.</li>
+        <li>Contributed Δv calculations for multiple mission phases, including Earth departure and Venus arrivals.</li>
+        <li>Assisted in developing and validating MATLAB scripts for orbital parameter computations.</li>
+        <li>Documented and presented results in an end-of-semester presentation</li>
+      </ul> 
+
+<br>
+<h2>Project Report</h2>
+
+<a href="AERE351_Final_Project_Report.pdf" target="_blank">
+  <img src="images/Astro/Astro_Intro_Slide.png"
+       alt="Space Mission Optimization Presentation Preview"
+       style="
+         width: 100%;
+         max-width: 500px;
+         display: block;
+         margin: 20px auto;
+         cursor: pointer;
+         box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+       ">
+</a>
+
+<p style="text-align:center; font-size: 0.9rem;">
+  Click preview to view full report (PDF)
+</p>
+
+
+      <a href="Projects.html" class="button">← All Projects</a><br>
+      <a href="AboutMe.html" class="button">← Back to Recent Projects</a>
+
+    </section>
+</div>
+
+<!-- Image Lightbox Modal -->
+<div id="lightbox" class="lightbox">
+  <span class="close">&times;</span>
+  <img class="lightbox-content" id="lightbox-img">
+</div>
+
+<script>
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightbox-img");
+  const closeBtn = document.querySelector(".close");
+
+  document.querySelectorAll(".image-grid img").forEach(img => {
+    img.addEventListener("click", () => {
+      lightbox.style.display = "block";
+      lightboxImg.src = img.src;
+    });
+  });
+
+  closeBtn.onclick = () => lightbox.style.display = "none";
+
+  // Click outside image to close
+  lightbox.onclick = (e) => {
+    if (e.target === lightbox) lightbox.style.display = "none";
+  }
+</script>
+
+</body>
+</html>

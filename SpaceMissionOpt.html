@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Senior Design Project</title>
+
+  <!-- Theme stylesheet -->
+  <link rel="stylesheet" href="assets/css/main.css" />
+
+  <style>
+    body {
+      background-color: #ffffff;
+      color: #000;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Flex wrapper to center content */
+    .container {
+      display: flex;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    /* Card styling */
+    section {
+      max-width: 900px;
+      width: 100%;
+      background: #fff;
+      padding: 2rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 20px;
+    }
+   
+  img { 
+    width: 100%; 
+  }
+
+  .image-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 15px;
+  }
+
+  .image-grid img {
+    width: 200%;
+    height: 400px;        /* choose any consistent height */
+    object-fit: contain;  /* Keep entire image visible */
+    border: 1px solid #ddd; /* optional, looks cleaner */
+    background: #f8f8f8;  /* optional padding background */
+  }
+
+  /* Responsive - stack images on small screens */
+  @media (max-width: 600px) {
+    .image-grid img {
+      width: 100%;
+      height: 200px;
+    }
+  }
+
+    ul {
+      margin-left: 20px;
+    }
+
+
+    .button-row a {
+      display: flex;       /* aligns buttons horizontally */
+      justify-content: center; /* centers them under the content */
+      gap: 10px;           /* spacing between buttons */
+      margin-top: 20px;    /* spacing above the buttons */
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 20px;
+    }
+
+    section {
+      max-width: 1600px;
+      width: 100%;
+      background: #fff;
+      padding: 2rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    gap: 20px;
+}
+
+.image-grid img {
+    width: 100%;
+    height: 480px; /* adjust to change crop height */
+    object-fit: cover; /* keeps all images uniformly cropped */
+    object-position: center;
+}
+
+/* LIGHTBOX POPUP */
+.lightbox {
+  display: none; 
+  position: fixed;
+  z-index: 9999;
+  padding-top: 40px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: rgba(0,0,0,0.85);
+}
+
+.lightbox-content {
+  display: block;
+  margin: auto;
+  max-width: 40%;
+  max-height: 85vh;
+}
+
+.close {
+  position: absolute;
+  top: 20px;
+  right: 35px;
+  color: white;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.hero-img {
+    width: 40%;     /* decrease % to make smaller */
+    display: block;
+    margin: 0 auto; /* center it */
+}
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Space Mission Optimization</h1>
+  </header>
+
+  <div class="container">
+    <section>
+      <p>
+      This project was part of the AERE 463 course (Introduction to Multidisciplinary Design Optimization). Using Python language, the project applies MDO techniques learnt thoughout the semester to the planning of an interplanetary mission from Earth to Europa. Our Team, MDOrbit, was motivated by the growing scientific 
+      interest in Europa’s subsurface ocean and the high cost of deep-space exploration. The final study aimed to minimize required Δv, which is the total velocity change required to execute a space mission directly affecting fuel mass and launch cost, and launch mass through optimal rocket staging, interplanetary transfers, and gravity-assist 
+      strategies using Mars and Jupiter flybys. My team was able to optimize trajectory parameters, staging masses, and time-of-flight under constraints. The results demonstrated how MDO 
+      can significantly improve mission efficiency and ultimately reduce fuel costs.
+      </p>
+
+
+      <h2>My Role</h2>
+      <ul>
+        <li>Developed XDSM diagrams to identify the different subsystems in the optimization framework</li>
+        <li>Contributed to the rocket staging optimization script.</li>
+        <li>Documented and commented code to improve its clarity, usability, and collaboration</li>
+      </ul> 
+
+
+<h2>Project Presentation</h2>
+
+<a href="06_MDOrbit.pdf" target="_blank">
+  <img src="images/Space Mission Opt/AERE463_Intro_Slide.png"
+       alt="Space Mission Optimization Presentation Preview"
+       style="
+         width: 100%;
+         max-width: 500px;
+         display: block;
+         margin: 20px auto;
+         cursor: pointer;
+         box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+       ">
+</a>
+
+<p style="text-align:center; font-size: 0.9rem;">
+  Click preview to view full presentation (PDF)
+</p>
+
+
+<br>
+
+      <a href="Projects.html" class="button">← All Projects</a><br>
+      <a href="AboutMe.html" class="button">← Back to Recent Projects</a>
+
+    </section>
+</div>
+
+<!-- Image Lightbox Modal -->
+<div id="lightbox" class="lightbox">
+  <span class="close">&times;</span>
+  <img class="lightbox-content" id="lightbox-img">
+</div>
+
+<script>
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightbox-img");
+  const closeBtn = document.querySelector(".close");
+
+  document.querySelectorAll(".image-grid img").forEach(img => {
+    img.addEventListener("click", () => {
+      lightbox.style.display = "block";
+      lightboxImg.src = img.src;
+    });
+  });
+
+  closeBtn.onclick = () => lightbox.style.display = "none";
+
+  // Click outside image to close
+  lightbox.onclick = (e) => {
+    if (e.target === lightbox) lightbox.style.display = "none";
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>High Altitude Balloon Experiments in Technology</title>
+
+  <!-- Theme stylesheet -->
+  <link rel="stylesheet" href="assets/css/main.css" />
+
+  <style>
+    body {
+      background-color: #ffffff;
+      color: #000;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Flex wrapper to center content */
+    .container {
+      display: flex;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    /* Card styling */
+    section {
+      max-width: 900px;
+      width: 100%;
+      background: #fff;
+      padding: 2rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 20px;
+    }
+   
+  img { 
+    width: 100%; 
+  }
+
+  .image-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 15px;
+  }
+
+  .image-grid img {
+    width: 100%; /* two per row */
+    height: 800px;
+    object-fit: cover;
+  }
+
+  /* Responsive - stack images on small screens */
+  @media (max-width: 600px) {
+    .image-grid img {
+      width: 100%;
+      height: 200px;
+    }
+  }
+
+    ul {
+      margin-left: 20px;
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 20px;
+    }
+
+    section {
+      max-width: 1600px;
+      width: 100%;
+      background: #fff;
+      padding: 2rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .hero-img {
+    width: 60%;     /* decrease % to make smaller */
+    display: block;
+    margin: 0 auto; /* center it */
+}
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>High Altitude Balloon Experiments in Technology</h1>
+  </header>
+
+  <div class="container">
+    <section>
+      <img class="hero-img" src="images/Arduino/Arduino.jpeg" alt="Arduino">
+
+      <p>
+        What began as a small experiment in sound turned into a full space-themed adventure! Henry the Dancing Cactus took a ride to the stratosphere as part of the Computational Techniques for Aerospace Design class. 
+        Our team partnered with Iowa State’s High Altitude Balloon Experiments in Technollogy (HABET) team, where I helped develop a sensor system using the Adafruit CLUE board to track how sound behaves as the air thins with altitude.</p>
+      <p> 
+        During the flight, our sensor recorded a maximum altitude of 118,835 ft, completing a total flight time of 81 minutes. We collected pressure readings from 982.24 hPa at ground level to a minimum of 21.38 hPa near peak altitude. 
+        Sound levels ranged from a loudest reading of 84.26 dB to a quietest reading of 8.52 dB.
+      </p>
+      <p>
+        Our goal was to determine how different altitude levels affect the decibel level of sound waves. Using the CLUE board, we wrote code that captured sound data throughout the ascent. From the data collected, we confirmed our 
+        expectation: as altitude increased and the air became thinner, the measured decibel levels consistently decreased.
+      </p>
+      <p>
+      This project allowed us to validate existing information on sound propagation as a function of altitude and provided valuable data, along with a photo of Henry we’ll never forget! 
+      </p>
+      
+      <h2>My Role</h2>
+      <ul>
+        <li>Programmed the Adafruit CLUE board in Arduino IDE to measure sound amplitude relative to atmospheric pressure.</li>
+        <li>Integrated and calibrated sensors, including a buzzer system, for accurate amplitude data collection of varying altitudes.</li>
+        <li>Conducted pre-launch validation through elevator tests to simulate altitude changes and verify code functionality.</li>
+        <li>Analyzed post-flight data to confirm the relationship between sound intensity and decreasing air density.</li>
+        <li>Collaborated with teammates to troubleshoot technical issues and ensure successful flight operation.</li>
+      </ul>
+
+      <h2>HABET Flight L-177-A Launch</h2>
+      <p>Watch the video below:</p>
+
+        <iframe 
+          width="560" 
+          height="315" 
+          src="https://www.youtube.com/embed/SE5rESSDbF8" 
+          title="HABET Flight L-177-A Launch"
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen>
+        </iframe><br>
+
+                                <!-- Code -->
+                                    <h2>Adafruit CLUE Board Code</h2>
+                                    <pre><code>
+#include &lt;Adafruit_Arcada.h&gt;
+#include &lt;CircularBuffer.h&gt;
+#include &lt;Adafruit_Sensor.h&gt;
+#include &lt;Adafruit_LSM6DS33.h&gt;
+#include &lt;Adafruit_LIS3MDL.h&gt;
+#include &lt;Adafruit_SHT31.h&gt;
+#include &lt;Adafruit_APDS9960.h&gt;
+#include &lt;Adafruit_BMP280.h&gt;
+#include &lt;PDM.h&gt;
+
+// file system object from SdFat
+FatFileSystem fatfs;
+
+// Configuration for the datalogging file:
+#define FILE_NAME "example.csv"
+#define BUZZER_PIN 46 // Pin 13 controls the onboard buzzer
+
+Adafruit_Arcada arcada;
+Adafruit_LSM6DS33 lsm6ds33;
+Adafruit_LIS3MDL lis3mdl;
+Adafruit_SHT31 sht30;
+Adafruit_APDS9960 apds9960;
+Adafruit_BMP280 bmp280;
+extern PDMClass PDM;
+extern Adafruit_FlashTransport_QSPI flashTransport;
+extern Adafruit_SPIFlash Arcada_QSPI_Flash;
+
+void setup() {
+  pinMode(11, INPUT_PULLUP); //Initialize the B button (11), button A is (5)
+  pinMode(46, OUTPUT);
+  arcada.displayBegin(); //Initialize display
+  arcada.setBacklight(255); //Turn on the display
+  arcada.display->fillScreen(ARCADA_BLACK); //Fill screen with black, also wipes any text currently displayed
+  arcada.display->setCursor(0, 100); //Set the cursor to be a set distance lower on the screen, 120 is around halfway
+  arcada.display->setTextSize(2.5); //Self-explanatory
+  arcada.display->print("INITIALIZING");
+  arcada.display->println("         "); //Go to the next line down
+  delay(500);
+  arcada.display->print(".");
+  delay(500);
+  arcada.display->print(".");
+  delay(500);
+  arcada.display->print(".");
+  delay(500);
+  arcada.display->fillScreen(ARCADA_BLACK); //Wipe screen
+
+  
+  delay(500);
+
+  // First call begin to mount the filesystem. Check that it returns true
+  // to make sure the filesystem was mounted.
+  arcada.display->setCursor(0, 100);
+  arcada.display->setTextSize(2);
+  arcada.display->print("Mounting Filesystem");
+  arcada.display->println("         ");
+  delay(2000);
+
+  /********** Check MIC */
+  PDM.onReceive(onPDMdata);
+  if (!PDM.begin(1, 16000)) {
+    Serial.println("**Failed to start PDM!");
+  }
+
+  arcada.filesysBeginMSD();
+  if (!fatfs.begin(&Arcada_QSPI_Flash)) {
+    Serial.println("Error, failed to mount newly formatted filesystem!");
+    Serial.println("Was the flash chip formatted with the fatfs_format example?");
+    arcada.display->setTextColor(ARCADA_RED);
+    arcada.display->print("Error, failed to mount newly formatted filesystem!");
+    while(1);
+
+  }
+  Serial.println("Mounted filesystem!");
+  arcada.display->setTextColor(ARCADA_GREEN);
+  arcada.display->print("Mounted Filesystem!");
+  delay(3000);
+
+  arcada.display->fillScreen(ARCADA_BLACK); //Wipe screen
+  arcada.display->setCursor(0, 100);
+  arcada.display->setTextSize(2);
+  arcada.display->setTextColor(ARCADA_WHITE, ARCADA_BLACK);
+  arcada.display->print("Press the B button");
+  arcada.display->println("         ");
+  arcada.display->print("to begin");
+  
+
+  while (digitalRead(11) > 0) {  //T
+    delay(10);                   //digitalRead = 1 when the button is NOT being pushed
+  }
+
+  Serial.begin(9600); //Starts a new serial
+  if (!apds9960.begin() || !lsm6ds33.begin_I2C() || !lis3mdl.begin_I2C() || 
+      !sht30.begin(0x44) || !bmp280.begin()) {
+      Serial.println("Failed to find CLUE sensors!");     //Initalizes sensors, sensors will not work if not initialized!!
+      arcada.haltBox("Failed to init CLUE sensors");
+  }
+  
+  arcada.display->fillScreen(ARCADA_BLACK); //Wipe screen
+
+  File dataFile = fatfs.open(FILE_NAME, FILE_WRITE);
+  if (dataFile) { //If data file is open
+    dataFile.println("New Run");
+    dataFile.close(); //Close it!!!
+  }
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  arcada.display->setTextColor(ARCADA_WHITE, ARCADA_BLACK);
+  arcada.display->setCursor(0, 0);
+  arcada.display->setTextSize(2);
+
+  Serial.println(bmp280.readTemperature());
+  arcada.display->print("Temp: ");
+  arcada.display->print(bmp280.readTemperature());
+  arcada.display->print(" C");
+  arcada.display->println("         ");
+
+  uint32_t pdm_vol = getPDMwave(256);
+  Serial.print("PDM volume: "); Serial.println(pdm_vol);
+  arcada.display->print("Mic: ");
+  arcada.display->print(pdm_vol);
+  arcada.display->println("      ");
+
+  // Open the datalogging file for writing. The FILE_WRITE mode will open
+  // the file for appending, i.e. it will add new data to the end of the file.
+  if (2>1) {
+    File dataFile = fatfs.open(FILE_NAME, FILE_WRITE);
+    for (int i = 0; i &lt; 5; i++) { // Beep buzzer 5 times  
+      
+      for(int t = 0; t &lt; 35; t++){
+        digitalWrite(BUZZER_PIN, HIGH);
+        delay(2);
+        digitalWrite(BUZZER_PIN,LOW);
+        delay(2);
+      }
+      float pdm_vol = getPDMwave(256);
+      float b_temp = bmp280.readTemperature();
+      float pres = bmp280.readPressure()/100;
+
+  // Check that the file opened successfully and write a line to it.
+
+      if (dataFile) {
+        dataFile.print(b_temp,2);
+        dataFile.print(" ");
+        dataFile.print(pres, 2);
+        dataFile.print(" ");
+        dataFile.println(pdm_vol,2);
+        
+
+
+
+  // Finally close the file when done writing. This is smart to do to make
+  // sure all the data is written to the file.
+
+        
+        Serial.println(b_temp,2);
+        
+        Serial.println("Wrote new measurement to data file!");
+        delay(1000);
+      }
+      
+    }
+    
+    if (dataFile) { //If data file is open
+        dataFile.println();
+        dataFile.close(); //Close it!!!
+      }
+    delay(60000);
+  }
+}
+
+void testlines(uint16_t color) {
+  arcada.display->fillScreen(ARCADA_BLACK);
+  for (int16_t x=0; x &lt; arcada.display->width(); x+=6) {
+    arcada.display->drawLine(0, 0, x, arcada.display->height()-1, color);
+    delay(0);
+  }
+  for (int16_t y=0; y &lt; arcada.display->height(); y+=6) {
+    arcada.display->drawLine(0, 0, arcada.display->width()-1, y, color);
+    delay(0);
+  }
+
+  arcada.display->fillScreen(ARCADA_BLACK);
+  for (int16_t x=0; x &lt; arcada.display->width(); x+=6) {
+    arcada.display->drawLine(arcada.display->width()-1, 0, x, arcada.display->height()-1, color);
+    delay(0);
+  }
+  for (int16_t y=0; y &lt; arcada.display->height(); y+=6) {
+    arcada.display->drawLine(arcada.display->width()-1, 0, 0, y, color);
+    delay(0);
+  }
+  arcada.display->fillScreen(ARCADA_BLACK);
+}
+
+
+
+
+int16_t minwave, maxwave;
+short sampleBuffer[256];// buffer to read samples into, each sample is 16-bits
+volatile int samplesRead;// number of samples read
+
+int32_t getPDMwave(int32_t samples) {
+  minwave = 30000;
+  maxwave = -30000;
+  
+  while (samples > 0) {
+    if (!samplesRead) {
+      yield();
+      continue;
+    }
+    for (int i = 0; i &lt; samplesRead; i++) {
+      minwave = min(sampleBuffer[i], minwave);
+      maxwave = max(sampleBuffer[i], maxwave);
+      //Serial.println(sampleBuffer[i]);
+      samples--;
+    }
+    // clear the read count
+    samplesRead = 0;
+  }
+  return maxwave-minwave;  
+}
+
+
+void onPDMdata() {
+  // query the number of bytes available
+  int bytesAvailable = PDM.available();
+
+  // read into the sample buffer
+  PDM.read(sampleBuffer, bytesAvailable);
+
+  // 16-bit, 2 bytes per sample
+  samplesRead = bytesAvailable / 2;
+}
+</code></pre>
+
+
+      <a href="Projects.html" class="button">← All Projects</a><br>
+      <a href="AboutMe.html" class="button">← Back to Recent Projects</a>
+
+    </section>
+  </div>
+
+</body>
+</html>

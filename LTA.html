@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lighter Than Air (LTA)</title>
+
+  <!-- Theme stylesheet -->
+  <link rel="stylesheet" href="assets/css/main.css" />
+
+  <style>
+    body {
+      background-color: #ffffff;
+      color: #000;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Flex wrapper to center content */
+    .container {
+      display: flex;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    /* Card styling */
+    section {
+      max-width: 900px;
+      width: 100%;
+      background: #fff;
+      padding: 2rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 20px;
+    }
+   
+  img { 
+    width: 100%; 
+  }
+
+  .image-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 15px;
+  }
+
+  .image-grid img {
+    width: 200%;
+    height: 400px;        /* choose any consistent height */
+    object-fit: contain;  /* Keep entire image visible */
+    border: 1px solid #ddd; /* optional, looks cleaner */
+    background: #f8f8f8;  /* optional padding background */
+  }
+
+  /* Responsive - stack images on small screens */
+  @media (max-width: 600px) {
+    .image-grid img {
+      width: 100%;
+      height: 200px;
+    }
+  }
+
+    ul {
+      margin-left: 20px;
+    }
+
+
+    .button-row a {
+      display: flex;       /* aligns buttons horizontally */
+      justify-content: center; /* centers them under the content */
+      gap: 10px;           /* spacing between buttons */
+      margin-top: 20px;    /* spacing above the buttons */
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 20px;
+    }
+
+    section {
+      max-width: 1600px;
+      width: 100%;
+      background: #fff;
+      padding: 2rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    gap: 20px;
+}
+
+.image-grid img {
+    width: 100%;
+    height: 480px; /* adjust to change crop height */
+    object-fit: cover; /* keeps all images uniformly cropped */
+    object-position: center;
+}
+
+/* LIGHTBOX POPUP */
+.lightbox {
+  display: none; 
+  position: fixed;
+  z-index: 9999;
+  padding-top: 40px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: rgba(0,0,0,0.85);
+}
+
+.lightbox-content {
+  display: block;
+  margin: auto;
+  max-width: 40%;
+  max-height: 85vh;
+}
+
+.close {
+  position: absolute;
+  top: 20px;
+  right: 35px;
+  color: white;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+}
+ 
+.hero-img {
+    width: 40%;     /* decrease % to make smaller */
+    display: block;
+    margin: 0 auto; /* center it */
+}
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Lighter Than Air (LTA)</h1>
+  </header>
+
+  <div class="container">
+    <section>
+      <img class="hero-img" src="images/LTA/FinishedPrototype.jpeg" alt="FinishedPrototype">
+
+      <p>
+        The Catbus project was my introduction to aerospace design and served as a foundation for understanding key aerodynamic principles in a practical setting. 
+        As a team of four, we were tasked with designing and constructing a lighter-than-air RC aircraft. Our team aimed to achieve stable, efficient flight that was assissted with agiant helium 
+        balloon through a challenging obstacle course. The team decided to draw inspiration from My Neighbor Totoro’s Catbus. The design integrated both the aesthetics and aerodynamic 
+        functionality.
+      </p>
+
+      <p>
+        As the team’s manufacturing and budgeting engineer, I managed material selection, inventory, and cost control to ensure we remained within budget while meeting 
+        structural and performance goals. The aircraft featured a tilted bi-copter configuration with dual propellers that provided balanced lift and an auxiliary motor generating 
+        forward thrust. This setup allowed us to explore the optimization of thrust-to-drag, stability control, and aerodynamic flow.
+      </p>
+
+      <p>
+        By the end of the semester, Catbus became more than just a creative design, it was a hands-on experiment in how aerodynamics, propulsion, and engineering decisions interact 
+        to create successful flight. The final competition brought together all teams in the course to test our design’s performance under real-world 
+        flight conditions.
+      </p>
+
+      <h2>My Role</h2>
+      <ul>
+        <li>Managed inventory, budgeting, and material allocation to stay within financial constraints.</li>
+        <li>Collaborated with the chief design and manufacturing engineers to integrate aerodynamic and structural requirements into the final design.</li>
+        <li>Developed a balanced propulsion configuration with dual lift propellers for stability and a rear propeller for thrust generation.</li>
+        <li>Applied aerodynamic principles to minimize turbulence and optimize thrust-to-drag performance for smoother flight.</li>
+        <li>Contributed to the aesthetic integration of the My Neighbor Totoro Catbus character by incorporating its design elements while maintaining structural integrity and weight efficiency.</li>
+        <li>Designed functional landing gear inspired by the Catbus legs to enhance stability during takeoff and landing.</li>
+      </ul>
+
+
+  <h2>Project Images</h2>
+<div class="image-grid">
+    <img src="images/LTA/FrontView.jpeg" alt="FrontView">
+    <img src="images/LTA/Manufacturing.jpeg" alt="Manufacturing">
+    <img src="images/LTA/RaceCourse1.jpeg" alt="RaceCourse1">
+    <img src="images/LTA/RaceCourse2.jpeg" alt="RaceCourse2">
+</div>
+
+      <div class="video-section" style="margin-top: 50px;">
+      <h2>LTA Competition Video Snippet</h2>
+        <video width="760" height="515" controls autoplay muted loop>
+        <source src="images/LTA/Comp.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+        </video>    
+</div>
+<br>
+
+      <a href="Projects.html" class="button">← All Projects</a><br>
+      <a href="AboutMe.html" class="button">← Back to Recent Projects</a>
+
+    </section>
+</div>
+
+<!-- Image Lightbox Modal -->
+<div id="lightbox" class="lightbox">
+  <span class="close">&times;</span>
+  <img class="lightbox-content" id="lightbox-img">
+</div>
+
+<script>
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightbox-img");
+  const closeBtn = document.querySelector(".close");
+
+  document.querySelectorAll(".image-grid img").forEach(img => {
+    img.addEventListener("click", () => {
+      lightbox.style.display = "block";
+      lightboxImg.src = img.src;
+    });
+  });
+
+  closeBtn.onclick = () => lightbox.style.display = "none";
+
+  // Click outside image to close
+  lightbox.onclick = (e) => {
+    if (e.target === lightbox) lightbox.style.display = "none";
+  }
+</script>
+
+
+</body>
+</html>

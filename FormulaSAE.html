@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Senior Design Project</title>
+
+  <!-- Theme stylesheet -->
+  <link rel="stylesheet" href="assets/css/main.css" />
+
+  <style>
+    body {
+      background-color: #ffffff;
+      color: #000;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Flex wrapper to center content */
+    .container {
+      display: flex;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    /* Card styling */
+    section {
+      max-width: 900px;
+      width: 100%;
+      background: #fff;
+      padding: 2rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 20px;
+    }
+   
+  img { 
+    width: 100%; 
+  }
+
+  .image-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 15px;
+  }
+
+  .image-grid img {
+    width: 200%;
+    height: 400px;        /* choose any consistent height */
+    object-fit: contain;  /* Keep entire image visible */
+    border: 1px solid #ddd; /* optional, looks cleaner */
+    background: #f8f8f8;  /* optional padding background */
+  }
+
+  /* Responsive - stack images on small screens */
+  @media (max-width: 600px) {
+    .image-grid img {
+      width: 100%;
+      height: 200px;
+    }
+  }
+
+    ul {
+      margin-left: 20px;
+    }
+
+
+    .button-row a {
+      display: flex;       /* aligns buttons horizontally */
+      justify-content: center; /* centers them under the content */
+      gap: 10px;           /* spacing between buttons */
+      margin-top: 20px;    /* spacing above the buttons */
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 20px;
+    }
+
+    section {
+      max-width: 1600px;
+      width: 100%;
+      background: #fff;
+      padding: 2rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    gap: 20px;
+}
+
+.image-grid img {
+    width: 100%;
+    height: 480px; /* adjust to change crop height */
+    object-fit: cover; /* keeps all images uniformly cropped */
+    object-position: center;
+}
+
+/* LIGHTBOX POPUP */
+.lightbox {
+  display: none; 
+  position: fixed;
+  z-index: 9999;
+  padding-top: 40px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: rgba(0,0,0,0.85);
+}
+
+.lightbox-content {
+  display: block;
+  margin: auto;
+  max-width: 40%;
+  max-height: 85vh;
+}
+
+.close {
+  position: absolute;
+  top: 20px;
+  right: 35px;
+  color: white;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.hero-img {
+    width: 40%;     /* decrease % to make smaller */
+    display: block;
+    margin: 0 auto; /* center it */
+}
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Formula SAE</h1>
+  </header>
+
+  <div class="container">
+    <section>
+      <img class="hero-img" src="images/Formula/CR-28.png" alt="CR-28">
+
+      <p>
+      I joined Formula SAE not because I was a lifelong motorsport enthusiast, but because I wanted to deepen my understanding of the design process 
+      behind high-performance vehicles. What began as curiosity quickly grew into admiration as I worked alongside incredibly knowledgeable teammates 
+      who pour their passion into every detail of the car. Being part of this environment has been both inspiring and motivating. It’s shown me how 
+      engineering, teamwork, and passion come together to create something extraordinary!  
+      </p>
+
+
+      <h2>My Role</h2>
+      <ul>
+        <li>Performed carbon fiber layups using both dry and pre-preg methods, prepared epoxy resin, and performed vacuum bagging to manufacture aerodynamic components for Cyclone Racing’s CR-28 and CR-30.</li>
+        <li>Collaborated in fabrication and finishing processes by sanding molds and composite structures to achieve high surface quality and precise fit.</li>
+        <li>Managed material preparation by measuring and cutting carbon fiber, peel ply, breather cloth, and vacuum bags.</li>
+        <li>Developed and iterated side wing designs for the EV CR-30 and conducted CFD simulations to achieve 15 lbs of downforce and &lt; 5 lbs of added drag.</li>
+      </ul> 
+
+  <h2>Project Images</h2>
+<div class="image-grid">
+    <img src="images/Formula/MoldPrep.png" alt="MoldPrep">
+    <img src="images/Formula/Suspension.png" alt="Suspension">
+    <img src="images/Formula/FrontWingInStackLayup.jpeg" alt="FrontWingInStackLayup">
+
+    <img src="images/Formula/Vacuum.jpeg" alt="Vacuum">
+    <img src="images/Formula/FinishedLayup.jpeg" alt="FinishedLayup">
+    <img src="images/Formula/WTTest.png" alt="WTTest">
+</div>
+<br>
+
+      <a href="Projects.html" class="button">← All Projects</a><br>
+      <a href="AboutMe.html" class="button">← Back to Recent Projects</a>
+
+    </section>
+</div>
+
+<!-- Image Lightbox Modal -->
+<div id="lightbox" class="lightbox">
+  <span class="close">&times;</span>
+  <img class="lightbox-content" id="lightbox-img">
+</div>
+
+<script>
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightbox-img");
+  const closeBtn = document.querySelector(".close");
+
+  document.querySelectorAll(".image-grid img").forEach(img => {
+    img.addEventListener("click", () => {
+      lightbox.style.display = "block";
+      lightboxImg.src = img.src;
+    });
+  });
+
+  closeBtn.onclick = () => lightbox.style.display = "none";
+
+  // Click outside image to close
+  lightbox.onclick = (e) => {
+    if (e.target === lightbox) lightbox.style.display = "none";
+  }
+</script>
+
+</body>
+</html>
